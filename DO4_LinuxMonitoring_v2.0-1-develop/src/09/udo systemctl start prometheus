@@ -1,0 +1,17 @@
+● prometheus.service - Monitoring system and time series database
+     Loaded: loaded (/lib/systemd/system/prometheus.service; enabled; vendor preset: enabled)
+     Active: inactive (dead) since Thu 2023-04-27 13:59:37 UTC; 4s ago
+       Docs: https://prometheus.io/docs/introduction/overview/
+    Process: 87446 ExecStart=/usr/bin/prometheus $ARGS (code=exited, status=0/SUCCESS)
+   Main PID: 87446 (code=exited, status=0/SUCCESS)
+
+Apr 27 13:59:37 student-compile prometheus[87446]: level=info ts=2023-04-27T13:59:37.250Z caller=main.go:511 msg="Scrape discovery manager stopped"
+Apr 27 13:59:37 student-compile prometheus[87446]: level=info ts=2023-04-27T13:59:37.250Z caller=main.go:525 msg="Notify discovery manager stopped"
+Apr 27 13:59:37 student-compile prometheus[87446]: level=info ts=2023-04-27T13:59:37.250Z caller=manager.go:814 component="rule manager" msg="Stopping rule manager..."
+Apr 27 13:59:37 student-compile prometheus[87446]: level=info ts=2023-04-27T13:59:37.250Z caller=manager.go:820 component="rule manager" msg="Rule manager stopped"
+Apr 27 13:59:37 student-compile prometheus[87446]: level=info ts=2023-04-27T13:59:37.251Z caller=main.go:545 msg="Scrape manager stopped"
+Apr 27 13:59:37 student-compile prometheus[87446]: level=info ts=2023-04-27T13:59:37.252Z caller=notifier.go:598 component=notifier msg="Stopping notification manager..."
+Apr 27 13:59:37 student-compile prometheus[87446]: level=info ts=2023-04-27T13:59:37.252Z caller=main.go:716 msg="Notifier manager stopped"
+Apr 27 13:59:37 student-compile prometheus[87446]: level=info ts=2023-04-27T13:59:37.253Z caller=main.go:728 msg="See you next time!"
+Apr 27 13:59:37 student-compile systemd[1]: prometheus.service: Succeeded.
+Apr 27 13:59:37 student-compile systemd[1]: Stopped Monitoring system and time series database.

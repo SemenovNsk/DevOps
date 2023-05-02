@@ -1,0 +1,74 @@
+version: '3.9'
+
+services:
+  script:
+    build: ../02/
+    container_name: mess
+    restart: unless-stopped
+    environment:
+      TZ: "Asia/Novosibirsk"
+
+
+  mygrafana:
+    image: grafana/grafana:latest
+    user: root
+    depends_on:
+      - prometheus
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      TZ: "Asia/Novosibirsk"
+    networks:
+      - default
+
+
+  prometheus:
+    image: prom/prometheus:latest
+    command: 
+       - --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+      # - "9100:9100"
+    
+    volumes:
+      - ./prometheus:/etc/prometheus
+    # hostname: node-exporter
+    container_name: prometheus
+    restart: unless-stopped
+    environment:
+      TZ: "Asia/Novosibirsk"
+    networks:
+      - default
+
+    # network_mode: host
+
+  node-exporter:
+    image: prom/node-exporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - ./prometheus:/etc/prometheus
+    container_name: node-exporter
+    hostname: node-exporter
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.ignored-mount-points
+      - ^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)
+    ports:
+      - 9100:9100
+    restart: unless-stopped
+    environment:
+      TZ: "Asia/Novosibirsk"
+    networks:
+      - default
+
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
